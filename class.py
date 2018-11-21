@@ -1,7 +1,9 @@
-class Class:
-    __slots__ = ['name', 'time', 'location']
+import datetime
 
-    def __init__(self, name, time, location):
-        self.name = name
+class Class:
+    __slots__ = ['code', 'time', 'location']
+
+    def __init__(self, code, time, location):
+        self.code = code
         self.time = time
         self.location = location
