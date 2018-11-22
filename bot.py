@@ -8,11 +8,20 @@ TOKEN = config['SECRETS']['client_id']
 
 client = discord.Client()
 
+commands = {
+    "!help": "displays available commands",
+    "!register": "add yourself as a user",
+    "!addclass": "add a class to your schedule",
+    "!addevent": "add an event to your schedule",
+    "!free": "displays who's free at the current time"
+}
 
 @client.event
 async def on_message(message):
-    pass
-
+    if (message.content.startswith('!')):
+        command = message.content.split()[0][1:]
+        if (command == 'help'):
+            await respond(message.channel, "__**Available Commands**__:\n%s" % (''.join(['**%s**: %s\n' % (k, v) for k, v in commands.items()])))
 
 @client.event
 async def respond(channel, msg):
@@ -25,6 +34,6 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    # await client.change_presence(game=discord.Game(name="on Michael's MacBook."))
+    print()
 
 client.run(TOKEN)
