@@ -11,16 +11,14 @@ import datetime
 def test1():
     print("Test 1:")
     will = User("Will", Schedule())
-    will.to_string()
-    print()
+    print(will)
 
 
 def test2():
     print("Test 2:")
     reynaldo = User("Reynaldo", Schedule())
     reynaldo.schedule.add_course(Course("CSCI141", EventTime(("Mon"), 1000, 1200), "GOL"))
-    reynaldo.to_string()
-    print()
+    print(reynaldo)
 
 
 def test3():
@@ -29,7 +27,7 @@ def test3():
     michael.schedule.add_course(Course("CSCI140", EventTime(("Mon", "Wed", "Fri"), 1200, 1400), "GOL"))
     print(michael.schedule.courses["CSCI140"].time.in_time(1300))  # True
     michael.schedule.add_event(Event("Skate", EventTime(("Mon"), 1800, 1900)))
-    michael.to_string()
+    print(michael)
 
 
 def test4():

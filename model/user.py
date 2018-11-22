@@ -19,13 +19,9 @@ class User:
     def is_conflict(self, start_one, end_one, start_two, end_two):
         return start_one < end_two and end_one > start_two
 
-    def to_string(self):
-        print("Name:", self.name)
-        for course in self.schedule.courses:
-            print(course)
-        for event in self.schedule.events:
-            print(event)
-        
+    def __str__(self):
+        return '**Name**: %s\n__**Schedule**__: %s' % (self.name, self.schedule)
+
 
     def __repr__(self):
         return 'User(%s, %s)' % (self.name, self.schedule) 

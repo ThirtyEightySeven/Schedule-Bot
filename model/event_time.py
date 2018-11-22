@@ -4,17 +4,17 @@ import datetime
 class EventTime:
     __slots__ = ['days', 'start', 'end']
 
-    def __init__(self, days=[], start=0, end=0):
+    def __init__(self, days=set(), start=0, end=0):
         self.days = days
         self.start = start
         self.end = end
     
-    def parse_input(self, input_str) -> list:
+    def parse_input(self, input_str) -> None:
         if input_str is None:
-            return []
+            return 
 
         while not input_str[0].isdigit():
-            self.days.append(day_dict[input_str[0]])
+            self.days.add(day_dict[input_str[0]])
             input_str = input_str[1:]
         
         start_str = ''
@@ -66,12 +66,15 @@ class EventTime:
         if basic_time > 1259:
             new_basic_time -= 1200
         
-        str_time = datetime.time(new_basic_time // 100, new_basic_time % 100)
+        str_time = str(datetime.time(new_basic_time // 100, new_basic_time % 100))
     
+        if new_basic_time < 1000:
+            str_time = str_time[1:]
+
         if basic_time >= 1200:
-            str_time = str(str_time)[:-3] + " PM"
+            str_time = str_time[:-3] + " PM"
         else:
-            str_time = str(str_time)[:-3] + " AM"
+            str_time = str_time[:-3] + " AM"
 
         return str_time
 
@@ -80,7 +83,7 @@ class EventTime:
         return current_time >= self.start and current_time <= self.end
 
     def __str__(self) -> str:
-        return '**Day(s)**: %s\n**Start**: %s\n**End: %s' % (self.days, self.format_time(self.start), self.format_time(self.end))
+        return 'Day(s): %s\nStart: %s\nEnd: %s' % (self.days, self.format_time(self.start), self.format_time(self.end))
 
     def __repr__(self) -> str:
         return 'EventTime(days=%s, start=%s, end=%s)' % (self.days, self.format_time(self.start), self.format_time(self.end))

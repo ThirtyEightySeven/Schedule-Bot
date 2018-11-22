@@ -78,7 +78,7 @@ async def on_message(message):
             if len(args) == 1:
                 if args[0] in data.db['users'][message.author.id].schedule.courses:
                     data.db['users'][message.author.id].schedule.courses.pop(args[0])
-                    data.write.data
+                    data.write_data
                     await respond(message.channel, "Course successfully removed.")
                 else:
                     await respond(message.channel, "Course is not in your schedule.")
