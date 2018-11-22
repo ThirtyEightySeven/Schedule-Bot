@@ -9,15 +9,22 @@ class User:
         for course in self.schedule.courses:
             if course.time.in_time(time):
                 return True
-        
+
         for event in self.schedule.events:
             if event.time.in_time(time):
                 return True
-        
+
         return False
-        
+
     def is_conflict(self, start_one, end_one, start_two, end_two):
         return start_one < end_two and end_one > start_two
+
+    def to_string(self):
+        print("Name:", self.name)
+        for course in self.schedule.courses:
+            print(course)
+        for event in self.schedule.events:
+            print(event)
 
 
 """

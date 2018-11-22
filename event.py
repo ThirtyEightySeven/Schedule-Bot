@@ -1,5 +1,6 @@
 import datetime
 
+
 class Event:
     __slots__ = "name", "time"
 
