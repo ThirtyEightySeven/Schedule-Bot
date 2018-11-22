@@ -1,5 +1,8 @@
+from model.data import Data
 import discord
 import configparser
+
+data = Data()
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -23,7 +26,9 @@ async def on_message(message):
         if command == 'help':
             await respond(message.channel, "__**Available Commands**__:\n%s" % (''.join(['**%s**: %s\n' % (k, v) for k, v in commands.items()])))
         elif command == 'register':
-            pass
+            if message.author.id not in data.db['users']:
+                data.add_user(message.author.id, message.author.name)
+                data.write_data()
         elif command == 'addclass':
             pass
         elif command == 'addevent':

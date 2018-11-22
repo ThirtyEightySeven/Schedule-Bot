@@ -34,11 +34,12 @@ def test3():
 
 def test4():
     data = Data()
-    #data.add_user(User("Will", Schedule()))
+    data.add_user(123456, 'Will', User("Will", Schedule()))
     [print('%s: %s\n' % (k, v)) for k, v in data.db['users'].items()]
-    print(data.db['users']['Will'].schedule.events['Skate'].time.in_time(data.db['users']['Michael'].schedule.courses['CSCI140'].time.start))
+    print(data.db)
+    # print(data.db['users']['Will'].schedule.events['Skate'].time.in_time(data.db['users']['Michael'].schedule.courses['CSCI140'].time.start))
     #print(data.db)
-    #data.write_data()
+    data.write_data()
     #print(data.db)
     #data.read_data()
     #print(data.db)

@@ -1,15 +1,22 @@
 from model.user import User
+from model.schedule import Schedule
 import pickle
 
 class Data:
     __slots__ = ['db']
 
     def __init__(self, db_file='db.data'):
-        self.read_data(db_file)
+        try:
+            self.read_data(db_file)
+        except:
+            self.db = {
+                "users": {
 
-    def add_user(self, user):
-        self.db['users'][user.name] = user
+                }
+            }
 
+    def add_user(self, user_id, name, schedule=Schedule()):
+        self.db['users'][user_id] = User(name, schedule)
     
     def read_data(self, db_file='db.data'):
         self.db = pickle.load(open(db_file, 'rb'))
