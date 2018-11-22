@@ -1,8 +1,8 @@
-from schedule import Schedule
-from user import User
-from course import Course
-from event import Event
-from event_time import EventTime
+from model.schedule import Schedule
+from model.user import User
+from model.course import Course
+from model.event import Event
+from model.event_time import EventTime
 import time
 import datetime
 

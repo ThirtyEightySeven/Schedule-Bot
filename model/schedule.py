@@ -1,5 +1,5 @@
-from course import Course
-from event import Event
+from model.course import Course
+from model.event import Event
 
 
 class Schedule:
