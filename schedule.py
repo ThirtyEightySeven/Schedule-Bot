@@ -1,3 +1,6 @@
+from _class import Class
+from event import Event
+
 class Schedule:
     __slots__ = ['classes', 'events']
     def __init__(self, classes={}, events={}):

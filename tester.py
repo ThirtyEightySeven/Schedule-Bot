@@ -1,11 +1,12 @@
-import schedule
-import user
+from schedule import Schedule
+from user import User
 import time
-
+import datetime
 
 def main():
-    miguel = user('Miguel', schedule())
+    miguel = User('Miguel', Schedule())
+    print(time.asctime(time.localtime(time.time())))
 
 
 if __name__ == "__main__":
-    main()        
+    main()                                                        
