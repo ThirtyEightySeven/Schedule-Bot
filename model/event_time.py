@@ -1,4 +1,5 @@
 from model.constants import day_dict
+import datetime
 
 class EventTime:
     __slots__ = ['days', 'start', 'end']
@@ -59,8 +60,27 @@ class EventTime:
         return final_time
 
 
+    def format_time(self, basic_time):
+        new_basic_time = basic_time
+
+        if basic_time > 1259:
+            new_basic_time -= 1200
+        
+        str_time = datetime.time(new_basic_time // 100, new_basic_time % 100)
+    
+        if basic_time >= 1200:
+            str_time = str(str_time)[:-3] + " PM"
+        else:
+            str_time = str(str_time)[:-3] + " AM"
+
+        return str_time
+
+
     def in_time(self, current_time: int) -> bool:
         return current_time >= self.start and current_time <= self.end
 
-    def __repr__(self):
-        return 'EventTime(days=%s, start=%s, end=%s)' % (self.days, self.start, self.end)
+    def __str__(self) -> str:
+        return '**Day(s)**: %s\n**Start**: %s\n**End: %s' % (self.days, self.format_time(self.start), self.format_time(self.end))
+
+    def __repr__(self) -> str:
+        return 'EventTime(days=%s, start=%s, end=%s)' % (self.days, self.format_time(self.start), self.format_time(self.end))

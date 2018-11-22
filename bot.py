@@ -67,50 +67,52 @@ async def on_message(message):
                     course_time = EventTime()
                     course_time.parse_input(args[1])
                     data.db['users'][message.author.id].schedule.add_course(Course(args[0], course_time, args[2]))
-                    # data.write_data()
-                    await respond(message.channel, "Added successfully.")                
+                    data.write_data()
+                    await respond(message.channel, "Course added successfully.")                
                 else:
                     await respond(message.channel, "You're not registered.")
             else: 
-                 await respond(message.channel, "Usage: !addcourse <id> <time> <place>\nExample: !addcourse CSCI140 MWF12P2P GOL")
+                 await respond(message.channel, "Usage: `!addcourse <id> <time> <place>`\nExample: !addcourse CSCI140 MWF12P2P GOL")
 
         elif command == 'removecourse':
             if len(args) == 1:
                 if args[0] in data.db['users'][message.author.id].schedule.courses:
                     data.db['users'][message.author.id].schedule.courses.pop(args[0])
-                    # data.write.data
+                    data.write.data
                     await respond(message.channel, "Course successfully removed.")
                 else:
                     await respond(message.channel, "Course is not in your schedule.")
             else:
-                await respond(message.channel, "Usage !removecourse <id>")
+                await respond(message.channel, "Usage `!removecourse <id>`")
 
         elif command == 'addevent':
             if len(args) == 2:
                 if message.author.id in data.db['users']:
-                    data.db['users'][message.author.id].schedule.add_event(Event(args[0], args[1]))
-                    # data.write_data()
+                    event_time = EventTime()
+                    event_time.parse_input(args[1])
+                    data.db['users'][message.author.id].schedule.add_event(Event(args[0], event_time))
+                    data.write_data()
+                    await respond(message.channel, "Event added successfully.")
                 else:
                     await respond(message.channel, "You're not registered.")
             else:
-                await respond(message.channel, "Usage: !addevent <name> <time>")   
+                await respond(message.channel, "Usage: `!addevent <name> <time>`")   
 
         elif command == 'removeevent':
             if len(args) == 1:
-                if data.db['users'][message.author.id].schedule.events[args[0]] in data.db['users'][message.author.id].schedule.events:
+                if args[0] in data.db['users'][message.author.id].schedule.events:
                     data.db['users'][message.author.id].schedule.events.pop(args[0])
-                    # dara.write_data
+                    data.write_data
                     await respond(message.channel, "Event successfully removed.")
                 else:
                     await respond(message.channel, "Event is not in your schedule.")
             else:
-                await respond(message.channel, "Usage: !removeevent <name>")
+                await respond(message.channel, "Usage: `!removeevent <name>`")
 
         elif command == 'free':
             current_time = time.asctime(time.localtime(time.time()))    
             day = current_time[:3]
             time = int(current_time.split()[3].replace(':','')[:4])
-            await respond(message.channel, "Day: %s" % (current_time[:3]))
 
         else:
             await respond(message.channel, "Command wasn't recognized. Use !help to see available commands.")
