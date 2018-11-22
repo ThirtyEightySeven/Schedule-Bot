@@ -16,7 +16,7 @@ class EventTime:
             self.days.append(day_dict[input_str[0]])
             input_str = input_str[1:]
         
-        start_str = ""
+        start_str = ''
         while len(input_str) > 0 and input_str[0].isdigit():
             start_str += input_str[0]
             input_str = input_str[1:]
