@@ -1,17 +1,17 @@
-from _class import Class
+from course import Course
 from event import Event
 
 class Schedule:
-    __slots__ = ['classes', 'events']
-    def __init__(self, classes={}, events={}):
-        self.classes = classes
+    __slots__ = ['courses', 'events']
+    def __init__(self, courses={}, events={}):
+        self.courses = courses
         self.events = events
     
-    def add_class(self, _class):
-        self.classes[_class.name] = _class
+    def add_course(self, course):
+        self.courses[course.name] = course
     
-    def remove_class(self, _class):
-        del self.classes[_class.name]                
+    def remove_course(self, course):
+        del self.courses[course.name]                
 
     def add_event(self, event):
         self.events[event.name] = event

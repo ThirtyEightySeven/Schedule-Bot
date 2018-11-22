@@ -1,6 +1,6 @@
 import datetime
 
-class Class:
+class Course:
     __slots__ = ['code', 'time', 'location']
 
     def __init__(self, code, time, location):
