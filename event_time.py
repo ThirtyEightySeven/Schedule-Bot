@@ -7,6 +7,4 @@ class EventTime:
         self.end = end
 
     def in_time(self, current_time):
-        if current_time >= self.start and current_time <= self.end:
-            return True
-        return False
+        return current_time >= self.start and current_time <= self.end
