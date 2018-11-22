@@ -20,3 +20,6 @@ class Schedule:
 
     def remove_event(self, event):
         del self.events[event.name]
+
+    def __repr__(self):
+        return 'Schedule(%s, %s)' % (self.courses, self.events) 

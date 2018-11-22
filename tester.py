@@ -41,9 +41,14 @@ def test3():
 
 def test4():
     data = Data()
-    data.add_user(User("Michael", Schedule()))
     print(data.db)
-    data.write_data()
+    print(data.db['users']['Michael'])
+    #data.add_user(User("Michael", Schedule()))
+    #print(data.db)
+    #data.write_data()
+    #print(data.db)
+    #data.read_data()
+    #print(data.db)
 
 
 def main():
