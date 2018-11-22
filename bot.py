@@ -14,7 +14,8 @@ client = discord.Client()
 commands = {
     "!help": "displays available commands",
     "!register": "add yourself as a user",
-    "!addclass": "add a class to your schedule",
+    "!unregister": "remove yourself as a user",
+    "!addcourse": "add a class to your schedule",
     "!addevent": "add an event to your schedule",
     "!free": "displays who's free at the current time"
 }
@@ -29,7 +30,17 @@ async def on_message(message):
             if message.author.id not in data.db['users']:
                 data.add_user(message.author.id, message.author.name)
                 data.write_data()
-        elif command == 'addclass':
+                await respond(message.channel, "Registration successful.")                
+            else:
+                await respond(message.channel, "You're already registered.")
+        elif command == 'unregister':
+            if message.author.id in data.db["users"]:
+                data.db['users'].pop(message.author.id)
+                data.write_data()
+                await respond(message.channel, "Unregistered successfully.")    
+            else:
+                await respond(message.channel, "You're not registered.")            
+        elif command == 'addcourse':
             pass
         elif command == 'addevent':
             pass
