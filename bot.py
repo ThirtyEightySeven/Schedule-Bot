@@ -1,8 +1,9 @@
 from model.data import Data
-import discord
-import configparser
 from model.course import Course
 from model.event import Event
+import discord
+import configparser
+import time
 
 data = Data()
 
@@ -79,7 +80,10 @@ async def on_message(message):
                 await respond(message.channel, "Usage: !addevent <name> <time>")   
 
         elif command == 'free':
-            pass
+            current_time = time.asctime(time.localtime(time.time()))
+            day = current_time[:3]
+            time = int(current_time.split()[3].replace(':','')[:4])
+            await respond(message.channel, "Day: %s" % (current_time[:3]))
         else:
             await respond(message.channel, "Command wasn't recognized. Use !help to see available commands.")
     

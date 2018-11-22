@@ -50,12 +50,22 @@ def test5():
     print(EventTime.parse_time("2:40 PM"))
     print(EventTime.parse_time("4 AM"))
 
+
+def test6():
+    print()
+    print()
+    testtime = EventTime()
+    testtime.parse_input("MWF12P2P")
+    print(testtime)
+
+
 def main():
     test1()
     test2()
     test3()
     test4()
-    test5()
+   #  test5()
+    test6()
 
 
 if __name__ == "__main__":

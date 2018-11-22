@@ -3,5 +3,5 @@ day_dict = {
     "T": "Tue",
     "W": "Wed",
     "R": "Thu",
-    "F":
+    "F": "Fri"
 }
