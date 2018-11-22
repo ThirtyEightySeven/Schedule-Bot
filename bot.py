@@ -31,27 +31,32 @@ async def on_message(message):
         args = None        
         if len(split_message) > 1:
             args = split_message[1:]
+
         if command == 'help':
             await respond(message.channel, "__**Available Commands**__:\n%s" % (''.join(['**%s**: %s\n' % (k, v) for k, v in commands.items()])))
+
         elif command == 'info':
             if message.author.id in data.db['users']:   
                 await respond(message.channel, data.db['users'][message.author.id])
             else:
                 await respond(message.channel, "You're not registered")
+
         elif command == 'register':
             if message.author.id not in data.db['users']:
                 data.add_user(message.author.id, message.author.name)
                 data.write_data()
-                await respond(message.channel, "Registration successful.")                
+                await respond(message.channel, "Registration successful.")
             else:
                 await respond(message.channel, "You're already registered.")
+    
         elif command == 'unregister':
             if message.author.id in data.db["users"]:
                 data.db['users'].pop(message.author.id)
                 data.write_data()
-                await respond(message.channel, "Unregistered successfully.")    
+                await respond(message.channel, "Unregistered successfully.")
             else:
-                await respond(message.channel, "You're not registered.")            
+                await respond(message.channel, "You're not registered.")
+
         elif command == 'addcourse' and args:
             if len(args) == 3:
                 if message.author.id in data.db['users'] and args[1] not in data.db['users'][message.author.id].schedule.courses:
@@ -64,11 +69,15 @@ async def on_message(message):
                  await respond(message.channel, "Usage: !addcourse <id> <time> <place>\nExample: !addcourse CSCI140 MWF12P2P GOL")
 
         elif command == 'addevent':
-            if message.author.id in data.db['users']:
-                data.db['users'][message.author.id].schedule.add_event(Event(args[0], args[1]))
-                # data.write_data()
+            if len(args) == 2:
+                if message.author.id in data.db['users']:
+                    data.db['users'][message.author.id].schedule.add_event(Event(args[0], args[1]))
+                    # data.write_data()
+                else:
+                    await respond(message.channel, "You're not registered.")
             else:
-                await respond(message.channel, "You're not registered.")
+                await respond(message.channel, "Usage: !addevent <name> <time>")   
+
         elif command == 'free':
             pass
         else:
