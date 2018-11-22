@@ -3,15 +3,16 @@ from event import Event
 
 class Schedule:
     __slots__ = ['courses', 'events']
+    
     def __init__(self, courses={}, events={}):
         self.courses = courses
         self.events = events
     
     def add_course(self, course):
-        self.courses[course.name] = course
+        self.courses[course.code] = course
     
     def remove_course(self, course):
-        del self.courses[course.name]                
+        del self.courses[course.code]                
 
     def add_event(self, event):
         self.events[event.name] = event
