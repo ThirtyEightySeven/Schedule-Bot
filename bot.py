@@ -18,10 +18,21 @@ commands = {
 
 @client.event
 async def on_message(message):
-    if (message.content.startswith('!')):
+    if message.content.startswith('!'):
         command = message.content.split()[0][1:]
-        if (command == 'help'):
+        if command == 'help':
             await respond(message.channel, "__**Available Commands**__:\n%s" % (''.join(['**%s**: %s\n' % (k, v) for k, v in commands.items()])))
+        elif command == 'register':
+            pass
+        elif command == 'addclass':
+            pass
+        elif command == 'addevent':
+            pass
+        elif command == 'free':
+            pass
+        else:
+            await respond(message.channel, "Command wasn't recognized. Use !help to see available commands.")
+    
 
 @client.event
 async def respond(channel, msg):

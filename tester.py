@@ -3,6 +3,7 @@ from model.user import User
 from model.course import Course
 from model.event import Event
 from model.event_time import EventTime
+from model.data import Data
 import time
 import datetime
 
@@ -38,10 +39,18 @@ def test3():
     michael.to_string()
 
 
+def test4():
+    data = Data()
+    data.add_user(User("Michael", Schedule()))
+    print(data.db)
+    data.write_data()
+
+
 def main():
     test1()
     test2()
     test3()
+    test4()
 
 
 if __name__ == "__main__":
