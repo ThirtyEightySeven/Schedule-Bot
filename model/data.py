@@ -9,7 +9,6 @@ class Data:
 
     def add_user(self, user):
         self.db['users'][user.name] = user
-        print(self.db)
 
     
     def read_data(self, db_file='db.data'):
