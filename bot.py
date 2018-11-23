@@ -164,5 +164,6 @@ async def on_ready():
     print(client.user.id)
     print('------')
     print()
+    await client.change_presence(game=discord.Game(name="!help for commands."))
 
 client.run(TOKEN)
