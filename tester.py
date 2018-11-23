@@ -6,6 +6,7 @@ from model.event_time import EventTime
 from model.data import Data
 import time
 import datetime
+import pickle
 
 
 def test1():
@@ -50,19 +51,22 @@ def test5():
 
 
 def test6():
-    print()
-    print()
-    testtime = EventTime()
-    testtime.parse_input("MWF12P2P")
-    print(testtime)
+    objects = []
+    with (open("db.data", "rb")) as openfile:
+        while True:
+            try:
+                objects.append(pickle.load(openfile))
+            except EOFError:
+                break
+    print(objects)
 
 
 def main():
-    test1()
-    test2()
-    test3()
-    test4()
-   #  test5()
+    # test1()
+    # test2()
+    # test3()
+    # test4()
+    # test5()
     test6()
 
 

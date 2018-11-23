@@ -5,7 +5,7 @@ from model.event import Event
 class Schedule:
     __slots__ = ['courses', 'events']
 
-    def __init__(self, courses={}, events={}):
+    def __init__(self, courses, events):
         self.courses = courses
         self.events = events
 

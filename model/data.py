@@ -15,8 +15,8 @@ class Data:
                 }
             }
 
-    def add_user(self, user_id, name, schedule=Schedule()):
-        self.db['users'][user_id] = User(name, schedule)
+    def add_user(self, user_id, name):
+        self.db['users'][user_id] = User(name, Schedule(dict(), dict()))
     
     def read_data(self, db_file='db.data'):
         self.db = pickle.load(open(db_file, 'rb'))

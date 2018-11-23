@@ -7,11 +7,11 @@ class User:
 
     def is_busy(self, time):
         for course in self.schedule.courses:
-            if course.time.in_time(time):
+            if self.schedule.courses[course].time.in_time(time):
                 return True
 
         for event in self.schedule.events:
-            if event.time.in_time(time):
+            if self.schedule.events[event].time.in_time(time):
                 return True
 
         return False

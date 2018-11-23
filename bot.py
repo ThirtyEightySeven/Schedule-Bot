@@ -67,6 +67,7 @@ async def on_message(message):
                     course_time = EventTime()
                     course_time.parse_input(args[1])
                     data.db['users'][message.author.id].schedule.add_course(Course(args[0], course_time, args[2]))
+                    print(data.db['users'][message.author.id])
                     data.write_data()
                     await respond(message.channel, "Course added successfully.")                
                 else:
@@ -96,7 +97,7 @@ async def on_message(message):
                 else:
                     await respond(message.channel, "You're not registered.")
             else:
-                await respond(message.channel, "Usage: `!addevent <name> <time>`")   
+                await respond(message.channel, "Usage: `!addevent <name> <time>`")
 
         elif command == 'removeevent':
             if len(args) == 1:
@@ -111,8 +112,19 @@ async def on_message(message):
 
         elif command == 'free':
             current_time = time.asctime(time.localtime(time.time()))    
-            day = current_time[:3]
-            time = int(current_time.split()[3].replace(':','')[:4])
+            # day = current_time[:3]
+            statuses = '__**Free Users**__\n'
+            free_people = []
+            for user in data.db['users']:
+                if not data.db['users'][user].is_busy(int(current_time.split()[3].replace(':','')[:4])):
+                    print('flag')
+                    free_people.append(data.db['users'][user].name)
+
+            for person in free_people:
+                statuses += person + '\n'
+                    
+            await respond(message.channel, statuses)
+                
 
         else:
             await respond(message.channel, "Command wasn't recognized. Use !help to see available commands.")

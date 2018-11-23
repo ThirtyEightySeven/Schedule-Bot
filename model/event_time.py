@@ -86,5 +86,4 @@ class EventTime:
         return 'Day(s): %s\nStart: %s\nEnd: %s' % (sorted(self.days, key=["Mon", "Tue", "Wed", "Thu", "Fri"].index), self.format_time(self.start), self.format_time(self.end))
 
     def __repr__(self) -> str:
-        print(day_dict.values.ind)
         return 'EventTime(days=%s, start=%s, end=%s)' % (sorted(self.days, key=["Mon", "Tue", "Wed", "Thu", "Fri"].index), self.format_time(self.start), self.format_time(self.end))
