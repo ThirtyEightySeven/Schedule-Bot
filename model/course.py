@@ -13,4 +13,4 @@ class Course:
         return "**%s**: \n%s\nLocation: %s" % (self.code, self.time, self.location)
 
     def __repr__(self):
-        return 'Course(%s, %s, %s)' % (self.code, self.time, self.location) 
+        return 'Course(%s, %s, %s)' % (self.code, self.time, self.location)

@@ -12,14 +12,24 @@ class Schedule:
     def add_course(self, course):
         self.courses[course.code] = course
 
-    def remove_course(self, course):
-        del self.courses[course.code]
+    def remove_course(self, course_name):
+        del self.courses[course_name]
     
+    def clear_courses(self):
+        self.courses.clear()
+
     def add_event(self, event):
         self.events[event.name] = event
 
-    def remove_event(self, event):
-        del self.events[event.name]
+    def remove_event(self, event_name):
+        del self.events[event_name]
+    
+    def clear_events(self):
+        self.events.clear()
+    
+    def clear_schedule(self):
+        self.clear_events()
+        self.clear_courses()
 
     def __str__(self):
         return '\n' + ''.join([self.courses[course].__str__() + '\n' for course in self.courses]) + ''.join([self.events[event].__str__() + '\n' for event in self.events])

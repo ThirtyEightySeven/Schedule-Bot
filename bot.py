@@ -22,8 +22,11 @@ commands = {
     "!unregister": "remove yourself as a user",
     "!addcourse": "add a course to your schedule",
     "!removecourse": "remove a course from your schedule",
+    "!clearcourses": "remove all courses from your schedule",
     "!addevent": "add an event to your schedule",
     "!removeevent": "remove an event from your schedule",
+    "!clearevents": "remove all events from your schedule",
+    "!clearschedule": "remove all courses and events from your schedule",   
     "!free": "display who's free at the current time"
 }
 
@@ -67,7 +70,6 @@ async def on_message(message):
                     course_time = EventTime()
                     course_time.parse_input(args[1])
                     data.db['users'][message.author.id].schedule.add_course(Course(args[0], course_time, args[2]))
-                    print(data.db['users'][message.author.id])
                     data.write_data()
                     await respond(message.channel, "Course added successfully.")                
                 else:
@@ -78,13 +80,20 @@ async def on_message(message):
         elif command == 'removecourse':
             if len(args) == 1:
                 if args[0] in data.db['users'][message.author.id].schedule.courses:
-                    data.db['users'][message.author.id].schedule.courses.pop(args[0])
+                    data.db['users'][message.author.id].schedule.remove_course(args[0])
                     data.write_data
                     await respond(message.channel, "Course successfully removed.")
                 else:
                     await respond(message.channel, "Course is not in your schedule.")
             else:
                 await respond(message.channel, "Usage `!removecourse <id>`")
+
+        elif command == 'clearcourses':
+            if message.author.id in data.db['users']:
+                data.db['users'][message.author.id].schedule.clear_courses()
+                await respond(message.channel, "Courses cleared successfully.")
+            else:
+                await respond(message.channel, "You're not registered.")
 
         elif command == 'addevent':
             if len(args) == 2:
@@ -102,13 +111,27 @@ async def on_message(message):
         elif command == 'removeevent':
             if len(args) == 1:
                 if args[0] in data.db['users'][message.author.id].schedule.events:
-                    data.db['users'][message.author.id].schedule.events.pop(args[0])
+                    data.db['users'][message.author.id].schedule.remove_event(args[0])
                     data.write_data
                     await respond(message.channel, "Event successfully removed.")
                 else:
                     await respond(message.channel, "Event is not in your schedule.")
             else:
                 await respond(message.channel, "Usage: `!removeevent <name>`")
+        
+        elif command == 'clearevents':
+            if message.author.id in data.db['users']:
+                data.db['users'][message.author.id].schedule.clear_events()
+                await respond(message.channel, "Events cleared successfully.")
+            else:
+                await respond(message.channel, "You're not registered.")
+
+        elif command == 'clearschedule':
+            if message.author.id in data.db['users']:
+                data.db['users'][message.author.id].schedule.clear_schedule()
+                await respond(message.channel, "Schedule cleared successfully.")
+            else:
+                await respond(message.channel, "You're not registered.")
 
         elif command == 'free':
             current_time = time.asctime(time.localtime(time.time()))    
@@ -117,7 +140,6 @@ async def on_message(message):
             free_people = []
             for user in data.db['users']:
                 if not data.db['users'][user].is_busy(int(current_time.split()[3].replace(':','')[:4])):
-                    print('flag')
                     free_people.append(data.db['users'][user].name)
 
             for person in free_people:
