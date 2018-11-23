@@ -1,6 +1,7 @@
 from model.constants import day_dict
 import datetime
 
+
 class EventTime:
     __slots__ = ['days', 'start', 'end']
 
@@ -8,7 +9,7 @@ class EventTime:
         self.days = days
         self.start = start
         self.end = end
-    
+
     def parse_input(self, input_str) -> None:
         if input_str is None:
             return
@@ -16,39 +17,39 @@ class EventTime:
         while not input_str[0].isdigit():
             self.days.add(day_dict[input_str[0]])
             input_str = input_str[1:]
-        
+
         start_str = ''
         while len(input_str) > 0 and (input_str[0].isdigit() or input_str[0] == ':'):
             start_str += input_str[0]
             input_str = input_str[1:]
-        
+
         start_str += ' '
 
         while len(input_str) > 0 and not input_str[0].isdigit():
             start_str += input_str[0]
             input_str = input_str[1:]
-        
+
         self.start = self.parse_time(start_str)
 
         end_str = ''
         while len(input_str) > 0 and (input_str[0].isdigit() or input_str[0] == ':'):
             end_str += input_str[0]
             input_str = input_str[1:]
-        
+
         end_str += ' '
 
         while len(input_str) > 0 and not input_str[0].isdigit():
             end_str += input_str[0]
             input_str = input_str[1:]
-        
+
         self.end = self.parse_time(end_str)
 
         print(self.start, self.end)
-        
+
     def parse_time(self, string_time: str) -> int:
         final_time = 0
         time_ampm = string_time.split()
-    
+
         if ':' in time_ampm[0]:
             split_time = time_ampm[0].split(":")
             if int(split_time[0]) == 12:
@@ -59,7 +60,7 @@ class EventTime:
 
         if time_ampm[1].lower()[0] == 'p' and not (1200 <= final_time <= 1259):
             final_time += 1200
-        
+
         return (final_time, time_ampm[1])
 
     def format_time(self, basic_time):
@@ -67,9 +68,9 @@ class EventTime:
 
         if basic_time[0] > 1159:
             new_basic_time -= 1200
-        
+
         str_time = str(datetime.time(new_basic_time // 100, new_basic_time % 100))
-    
+
         if new_basic_time < 1000:
             str_time = str_time[1:]
 

@@ -1,6 +1,3 @@
-import datetime
-
-
 class Course:
     __slots__ = ['code', 'time', 'location']
 

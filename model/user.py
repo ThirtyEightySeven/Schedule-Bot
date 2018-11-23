@@ -22,6 +22,5 @@ class User:
     def __str__(self):
         return '**Name**: %s\n__**Schedule**__: %s' % (self.name, self.schedule)
 
-
     def __repr__(self):
-        return 'User(%s, %s)' % (self.name, self.schedule) 
+        return 'User(%s, %s)' % (self.name, self.schedule)

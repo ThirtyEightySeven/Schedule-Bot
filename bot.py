@@ -55,7 +55,7 @@ async def on_message(message):
                 await respond(message.channel, "Registration successful.")
             else:
                 await respond(message.channel, "You're already registered.")
-    
+
         elif command == 'unregister':
             if message.author.id in data.db["users"]:
                 data.db['users'].pop(message.author.id)
@@ -118,7 +118,7 @@ async def on_message(message):
                     await respond(message.channel, "Event is not in your schedule.")
             else:
                 await respond(message.channel, "Usage: `!removeevent <name>`")
-        
+
         elif command == 'clearevents':
             if message.author.id in data.db['users']:
                 data.db['users'][message.author.id].schedule.clear_events()
@@ -144,13 +144,13 @@ async def on_message(message):
 
             for person in free_people:
                 statuses += person + '\n'
-                    
+
             await respond(message.channel, statuses)
-                
+
 
         else:
             await respond(message.channel, "Command wasn't recognized. Use !help to see available commands.")
-    
+
 
 @client.event
 async def respond(channel, msg):
