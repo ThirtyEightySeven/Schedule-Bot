@@ -83,7 +83,8 @@ class EventTime:
         return current_time >= self.start and current_time <= self.end
 
     def __str__(self) -> str:
-        return 'Day(s): %s\nStart: %s\nEnd: %s' % (self.days, self.format_time(self.start), self.format_time(self.end))
+        return 'Day(s): %s\nStart: %s\nEnd: %s' % (sorted(self.days, key=["Mon", "Tue", "Wed", "Thu", "Fri"].index), self.format_time(self.start), self.format_time(self.end))
 
     def __repr__(self) -> str:
-        return 'EventTime(days=%s, start=%s, end=%s)' % (self.days, self.format_time(self.start), self.format_time(self.end))
+        print(day_dict.values.ind)
+        return 'EventTime(days=%s, start=%s, end=%s)' % (sorted(self.days, key=["Mon", "Tue", "Wed", "Thu", "Fri"].index), self.format_time(self.start), self.format_time(self.end))
