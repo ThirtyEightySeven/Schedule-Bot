@@ -4,14 +4,14 @@ import datetime
 class EventTime:
     __slots__ = ['days', 'start', 'end']
 
-    def __init__(self, days=set(), start=0, end=0):
+    def __init__(self, days, start=0, end=0):
         self.days = days
         self.start = start
         self.end = end
     
     def parse_input(self, input_str) -> None:
         if input_str is None:
-            return 
+            return
 
         while not input_str[0].isdigit():
             self.days.add(day_dict[input_str[0]])
@@ -93,6 +93,7 @@ class EventTime:
         return current_time >= self.start and current_time <= self.end
 
     def __str__(self) -> str:
+        print(self.start, self.end)
         return 'Day(s): %s\nStart: %s\nEnd: %s' % (sorted(self.days, key=["Mon", "Tue", "Wed", "Thu", "Fri"].index), self.format_time(self.start), self.format_time(self.end))
 
     def __repr__(self) -> str:

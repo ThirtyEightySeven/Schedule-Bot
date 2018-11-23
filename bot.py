@@ -67,7 +67,7 @@ async def on_message(message):
         elif command == 'addcourse':
             if len(args) == 3:
                 if message.author.id in data.db['users'] and args[1] not in data.db['users'][message.author.id].schedule.courses:
-                    course_time = EventTime()
+                    course_time = EventTime(set())
                     course_time.parse_input(args[1])
                     data.db['users'][message.author.id].schedule.add_course(Course(args[0], course_time, args[2]))
                     data.write_data()
@@ -98,7 +98,7 @@ async def on_message(message):
         elif command == 'addevent':
             if len(args) == 2:
                 if message.author.id in data.db['users']:
-                    event_time = EventTime()
+                    event_time = EventTime(set())
                     event_time.parse_input(args[1])
                     data.db['users'][message.author.id].schedule.add_event(Event(args[0], event_time))
                     data.write_data()
